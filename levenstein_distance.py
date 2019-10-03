@@ -8,12 +8,6 @@ import sys
 import os
 ##
 
-# clean text
-clean_re = re.compile('\W+')
-def clean_text(text):
-    return clean_re.sub(' ', text)
-#fin clean text
-
 #distancia de levenstein sin ahorro espacial
 def levenstein_distance(word1, word2):
     levMat = np.zeros(dtype=np.int8, shape=(len(word1) + 1,len(word2) + 1))
@@ -83,13 +77,3 @@ def levenstein_caller(file, tollerance,token):
             print(res)
             print("\n")
 #fin de la funcion levenstein_caller
-
-#main
-if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        f = sys.argv[1]
-        k = sys.argv[2]
-        to = sys.argv[3]
-        levenstein_caller(f,k,to)
-    else:
-        syntax()
