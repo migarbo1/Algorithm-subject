@@ -2,7 +2,6 @@
 #! -*- encoding utf8
 
 ## zona de imports
-#import numpy as np
 import re
 import sys
 import os
@@ -15,6 +14,7 @@ clean_re = re.compile('\W+')
 def clean_text(text):
     return clean_re.sub(' ', text)
 #fin clean text
+
 #funcion que llama para cada palabra del diccionario a la funcion de levenstein
 def caller(file, tollerance,token, mode):
     file = open(file,"r")
@@ -44,7 +44,7 @@ def caller(file, tollerance,token, mode):
             wordsPerDist[v] = wordsPerDist.get(v) + [k]
 
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
-    for tol in range(0, int(tollerance)):
+    for tol in range(0, int(tollerance) + 1):
         res = wordsPerDist.get(tol,[])
         if not res == []:
             print("tolerancia: " + str(tol) + "\n" + "palabras: ")
@@ -55,10 +55,10 @@ def caller(file, tollerance,token, mode):
 #main
 if __name__ == "__main__":
     if len(sys.argv) == 5:
-        f = sys.argv[1]
-        k = sys.argv[2]
-        to = sys.argv[3]
-        m = sys.argv[4]
+        f = sys.argv[1] #fichero
+        k = sys.argv[2] #tolerancia
+        to = sys.argv[3] #token
+        m = sys.argv[4] #modo
         caller(f,k,to,m)
     else:
-        syntax()
+        print("argumentos inválidos. Requerido nombre fichero, tolerancia, token y modo")

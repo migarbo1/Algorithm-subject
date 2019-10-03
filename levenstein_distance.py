@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #! -*- encoding utf8
 
+import numpy as np
+
+
 #distancia de levenstein sin ahorro espacial
 def levenstein_distance(word1, word2):
     levMat = np.zeros(dtype=np.int8, shape=(len(word1) + 1,len(word2) + 1))
@@ -21,8 +24,8 @@ def levenstein_distance(word1, word2):
 
 #distancia de levenstein con ahorro de espacio
 def better_levenstein_distance(word1, word2):
-    c_row = [None] * (len(word1) + 1)
-    p_row = [None] * (len(word1) + 1)
+    c_row = np.zeros(dtype=np.int8, shape=(len(word1) + 1))
+    p_row = np.zeros(dtype=np.int8, shape=(len(word1) + 1))
     c_row[0] = 0
     for i in range(1, len(word1) + 1):
         c_row[i] = c_row[i - 1] + 1
@@ -32,6 +35,6 @@ def better_levenstein_distance(word1, word2):
         for i in range(1, len(word1) + 1):
             c_row[i] = min(c_row[i - 1] + 1, #elemento anterior en eje x
                             p_row[i] + 1, #elemento de abajo en y
-                            p_row[i - 1] + (word1[i - 1] != word2[i - 1]))#elemento anteior en x e y mas si son diferentes (sustitucion por el mismo es 0)
+                            p_row[i - 1] + (word1[i - 1] != word2[j - 1]))#elemento anteior en x e y mas si son diferentes (sustitucion por el mismo es 0)
     return c_row[len(word1)]
 #fin distancia levenstein con ahorro espacial
