@@ -41,7 +41,7 @@ def caller(file, tollerance,token, mode):
     for tol in range(0, int(tollerance) + 1):
         res = wordsPerDist.get(tol,[])
         if not res == []:
-            print("tolerancia: " + str(tol) + "\n" + "palabras: " + srt(len(res)))
+            print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(res)))
             print(res)
             print("\n")
 #fin de la funcion levenstein_caller
