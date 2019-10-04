@@ -29,11 +29,11 @@ def caller(file, tollerance,token, mode):
         dictionary[t] = dictionary.get(t,[])
         if dictionary[t] == []:
             if mode == 1:
-                r = [better_levenstein_distance(t,token)] ###aqui esta la llamada###
+                r = better_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
             else:
-                r = [damerau_levenstein_distance(t,token)] ###aqui esta la llamada###
+                r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
 
