@@ -55,4 +55,4 @@ if __name__ == "__main__":
         m = sys.argv[4] #modo
         caller(f,k,to,m)
     else:
-        print("argumentos inválidos. Requerido nombre fichero, tolerancia, token y modo")
+        print("argumentos invalidos. Requerido nombre fichero, tolerancia, token y modo")
