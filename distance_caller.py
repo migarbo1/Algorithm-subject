@@ -36,7 +36,7 @@ def caller(file, tollerance,token, mode):
                 r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
-
+    print(wordsPerDist)
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     for tol in range(0, int(tollerance) + 1):
         res = wordsPerDist.get(tol,[])
@@ -53,6 +53,6 @@ if __name__ == "__main__":
         k = sys.argv[2] #tolerancia
         to = sys.argv[3] #token
         m = sys.argv[4] #modo
-        caller(f,k,to,m)
+        caller(f,int(k),to,int(m))
     else:
         print("argumentos invalidos. Requerido nombre fichero, tolerancia, token y modo")
