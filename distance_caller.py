@@ -30,16 +30,12 @@ def caller(file, tollerance,token, mode):
         if dictionary[t] == []:
             if mode == 1:
                 r = [better_levenstein_distance(t,token)] ###aqui esta la llamada###
-                if wordsPerDist.get(r,[]) == []:
-                    wordsPerDist[r] = [t]
-                else:
-                    wordsPerDist[r] += [t]
+                wordsPerDist[r] = wordsPerDist.get(r,[])
+                wordsPerDist[r] += [t]
             else:
                 r = [damerau_levenstein_distance(t,token)] ###aqui esta la llamada###
-                if wordsPerDist.get(r,[]) == []:
-                    wordsPerDist[r] = [t]
-                else:
-                    wordsPerDist[r] += [t]
+                wordsPerDist[r] = wordsPerDist.get(r,[])
+                wordsPerDist[r] += [t]
 
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     for tol in range(0, int(tollerance) + 1):
