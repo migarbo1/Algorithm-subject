@@ -12,8 +12,8 @@ def damerau_levenstein_distance(word1, word2):
     c_row[0] = 0 #caso i = j = 1
     for i in range(1, len(word1) + 1): #caso i > 0 j = 0
         c_row[i] = c_row[i - 1] + 1
-
     p_row,c_row = c_row,p_row
+    c_row[0] = p_row[0] + 1 #esto es para sumarle 1 a la col[0], es decir, simular la insercion completa de la palabra
     for i in range(1, len(word1) + 1): #caso j = 1 i > 0
         c_row[i] = min(c_row[i - 1] + 1, #elemento anterior en eje x
                     p_row[i] + 1, #elemento de abajo en y
@@ -22,6 +22,7 @@ def damerau_levenstein_distance(word1, word2):
     for j in range(2, len(word2) + 1):
         aux_row,p_row,c_row = p_row,c_row,aux_row
         c_row[0] = p_row[0] + 1 #esto es para sumarle 1 a la col[0], es decir, simular la insercion completa de la palabra
+
         for i in range(1, len(word1) + 1):
             if (word1[i -1] == word2[j - 2] and word2[j -1] == word1[i - 2]):
                 c_row[i] = min(c_row[i - 1] + 1, #elemento anterior en eje x
