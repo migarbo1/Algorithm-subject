@@ -5,9 +5,13 @@
 import re
 import sys
 import os
+import copy
 from levenstein_distance import better_levenstein_distance
 from damerau_levenstein import damerau_levenstein_distance
 ##
+
+dictionary = {}
+wordsPerDist = {}
 
 # clean text
 clean_re = re.compile('\W+')
@@ -23,30 +27,41 @@ def caller(file, tollerance,token, mode):
     text = clean_text(text)
     text = text.lower()
     text = text.split()
-    dictionary = {}
-    wordsPerDist = {}
     for t in text:
         dictionary[t] = dictionary.get(t,[])
         if dictionary[t] == []:
             dictionary[t] = ["v"]
             if mode == 1:
-                r = better_levenstein_distance(t,token) ###aqui esta la llamada###
+                r = int(better_levenstein_distance(t,token)) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
             else:
-                r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
+                r = int(damerau_levenstein_distance(t,token)) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
+    first = True
     for k in wordsPerDist.keys():
-        aux1 = wordsPerDist[k-1]
-        aux2 = wordsPerDist[k]
-        wordsPerDist[k] = aux1 + aux2
+        print("al principio")
+        print(wordsPerDist[k])
+        if first:
+            aux1 = wordsPerDist[k]
+            first = False
+        else:
+            aux1 += wordsPerDist[k]
+        wordsPerDist[k] = copy.copy(aux1)
+        print("despues")
+        print(wordsPerDist[k])
+        print("\n")
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
-    for tol in range(0, int(tollerance) + 1):
-        res = wordsPerDist.get(tol,[])
-        if not res == []:
-            print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(res)))
-            print(res)
+    print("Printenado las cosas")
+    print("\n")
+    for tol in wordsPerDist.keys():
+        if int(tol) >= tollerance+1:
+            break
+        wordsPerDist[tol]
+        if not wordsPerDist[tol] == []:
+            print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(wordsPerDist[tol])))
+            print(wordsPerDist[tol])
             print("\n")
 #fin de la funcion levenstein_caller
 
