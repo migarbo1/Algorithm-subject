@@ -36,7 +36,6 @@ def caller(file, tollerance,token, mode):
                 r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
-<<<<<<< HEAD
     print(wordsPerDist)
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     for tol in range(0, int(tollerance) + 1):
@@ -44,7 +43,6 @@ def caller(file, tollerance,token, mode):
         if not res == []:
             print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(res)))
             print(res)
-=======
     first = True
     for k in wordsPerDist.keys():
         if first:
@@ -61,7 +59,6 @@ def caller(file, tollerance,token, mode):
         if not wordsPerDist[tol] == []:
             print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(wordsPerDist[tol])))
             print(wordsPerDist[tol])
->>>>>>> 9e103f3... quitados prints debug
             print("\n")
 #fin de la funcion levenstein_caller
 

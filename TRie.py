@@ -3,25 +3,26 @@
 
 class nodo(object):
 
-    def __init__(self, nodoPadre: nodo, profundidad: int, letraLlegada: chr, palabra: str):
+    def __init__(self, nodoPadre: nodo, profundidad: int, letraLlegada: chr, palabra: str, id : int):
         self.nodoPadre = nodoPadre
         self.hijos = {}
         self.letraLlegada = letraLlegada
         self.palabra = palabra
         self.profundidad = profundidad
+        self.id = id #para ser mas accesible la matriz (sera un entero root=0 y se ira incrementando)
 
     def insertarHijo(letra: char, palabra: str):
         self.hijos[letra] = nodo.__init__(self, self.profundidad + 1, letra, palabra)
 
     def devolverHijo(letra: char):
         return hijos.get(letra, 0)
-    
+
     def char(): #dado un nodo devuelve el caracter con el que se ha llegado al nodo
         return self.letraLlegada
-    
+
     def parent(): #dado un nodo devuelve padre
         return self.nodoPadre
-    
+
     def profundidad(): #dado un nodo devuelve la profundidad
         return self.profundidad
 
@@ -39,5 +40,6 @@ class trie(object):
             if res == 0:
                 if l
                 nodoActual.insertarHijo(l, none)
-    
 
+    def root(): #para tener el nodo inicial del trie
+        return self.nodoRaiz
