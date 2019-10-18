@@ -16,10 +16,11 @@
 import numpy as np
 import TRie
 
-def levenstein_vs_trie(trie: trie, palabra):
+def levenstein_vs_trie(trie: trie, palabra, k):
     nodo = trie.root()
     matrix = np.zeros(shape(len(trie.array) + 1), len(palabra) + 1) #creamos una matriz de nodos (filas) por simbolos de la palabra (columnas)
-    
+    result = []
+
     matrix[nodo.id,0] = 0 #case 1
     
     for i in len(palabra)+1: #case 2
@@ -31,8 +32,13 @@ def levenstein_vs_trie(trie: trie, palabra):
             matrix[n.id,i] = min(
                 matrix[n.id,i - 1] + 1,
                 matrix[n.parent().id,i] + 1,
-                matrix[n.parent().id,i - 1] + (a[i] != )n.char()
+                matrix[n.parent().id,i - 1] + (a[i] != n.char())
             )
     print(matrix)
 
-    return matrix[len(trie.array,len(palabra))]
+    for n in trie.array:
+        if matrix[n.id,len(palabra)] <= k:
+            result[n] = n.sacarPalabra()
+
+    return result
+    
