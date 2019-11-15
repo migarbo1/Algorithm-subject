@@ -12,7 +12,8 @@ import TRie as trie
  def damreau_levenstein_vs_trie(trie, word, toler){
  	node = trie.root()
  	matrix = np.zeros(dtype=np.int8, shape=(len(trie.array) + 1, len(word) + 1))
-
+ 	cont = 0
+ 	casTransp = False;
  	matrix[node.idi, 0] = 0
 
  	for l in word{
@@ -21,17 +22,23 @@ import TRie as trie
 
  	for n in trie.array{
 		matrix[n.idi, 0] = profundidad
-
 		for ll in word{
+			fills = n.hijos;
+			for f in fills{
+				if(f.char == ll && word[cont + 1] == n.char){
+					casTransp = True;
+				}
+			}
 			if(node.idi != n.idi){
 				matrix[n.idi, ll] = min(
 						matrix[n.idi, i-1] + 1, #ins
-                		matrix[n.parent().id,i] + 1, #borr
-                		matrix[n.parent().id,i - 1] + (word[i] != n.char()), #sust
-                		#si ALGUN(for) hijo.char  == ll && ll+1 == n.char matrix[n.parent.parent, i-2] ,#canvi lletres
+                		matrix[n.parent().idi, i + 1], #borr
+                		matrix[n.parent().idi, i - 1] + (word[i] != n.char()), #sust
+                		if(casTransp){ matrix[n.parent().idi, i-2] } #canvi lletres
 
-					)
+            			)
 			}
+		cont += 1
 		} 	
  	}
 
