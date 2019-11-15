@@ -27,11 +27,11 @@ class nodo:
     def parent(self): #dado un nodo devuelve padre
         return self.nodoPadre
 
-    def profundidad(self): #dado un nodo devuelve la profundidad
-        return self.profundidad
+    #def profundidad(self): #dado un nodo devuelve la profundidad
+        #return self.profundidad
 
-    def sacarPalabra(self): #dado un nodo devuelve la palabra
-        return self.palabra
+    #def sacarPalabra(self): #dado un nodo devuelve la palabra
+        #return self.palabra
 # tenemos que hacer iun if para ver si algo es none xd
 # haser to stringos 
 class trie:
