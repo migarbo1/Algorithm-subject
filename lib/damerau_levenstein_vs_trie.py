@@ -1,6 +1,6 @@
 #import
 import numpy as np
-import TRie as trie
+import TRie
  
  #tenim el trie, paraula i tolereancia
  #hem d'anar recorrent la paraula per el trie i calculant damerau_levenstein
@@ -9,7 +9,7 @@ import TRie as trie
  #cas 3 node X 0 lletres = profundidad ATRIBUTO // hem de tornar "la quantitat de voltes que hem inserit" això ve donat per la capa en la que esta i de ahi profundidad
  #cas general node X lletra 1-len(paraula) -> min entre la tipica + lletra actual = node fill // lletra següent = node actual
 
-def damerau_levenstein_vs_trie(word, toler):
+def damerau_levenstein_vs_trie(trie, word, toler):
  	
     node = trie.root()
     matrix= np.zeros(dtype = np.int8,shape = (len(trie.array)+1, len(word)+1))
