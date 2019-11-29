@@ -16,7 +16,7 @@
 import numpy as np
 import TRie as trie
 
-def levenstein_vs_trie(trie, palabra, k):
+def levenstein_vs_trie_ramificacion(trie, palabra, k):
     lista = [(0,0,0)] # (elementode la plalabra, nodo, distancia a mi coraxon)
     nodo = trie.root()
     result = []
