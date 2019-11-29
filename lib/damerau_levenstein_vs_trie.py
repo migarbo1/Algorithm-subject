@@ -17,17 +17,19 @@ def damerau_levenstein_vs_trie(trie, word, toler):
     casTransp = False;
     matrix[node.idi, 0] = 0
     aux = 3000
+    res = []
 
-    for l in word:
-        matrix[node.idi, l] = l
+    for ln in range(len(word)+1):
+        matrix[node.idi, ln] = ln
  	
     for n in trie.array:
-        matrix[n.idi, 0] = trie.profundidad
-        for ll in range(word):
-            fills = n.hijos;
+        matrix[n.idi, 0] = n.profundidad
+        for ll in range(len(word)+1):
+            fills = n.hijos.values();
             for f in fills:
-                if(f.char == ll and word[cont + 1] == n.char):
-                    casTransp = True;
+                if(ll < len(word)-1):
+                    if(f.letraLlegada == word[ll] and word[ll+1] == n.letraLlegada):
+                        casTransp = True;
 				
 			
             if(node.idi != n.idi):
@@ -35,12 +37,20 @@ def damerau_levenstein_vs_trie(trie, word, toler):
                    aux = matrix[n.parent().idi, ll-2] #canvi lletres
                 matrix[n.idi, ll] = min(
                         matrix[n.idi, ll-1] + 1, #ins
-                        matrix[n.parent().idi, ll + 1], #borr
-                        matrix[n.parent().idi, ll - 1] + (word[ll] != n.char()), #sust
-                        aux               
+                        matrix[n.nodoPadre.idi, ll] + 1, #borr
+                        matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
+                        aux  #esto hi ha que revisar-ho              
             			)            
         cont += 1
+    
+    for n in trie.array:
+        if(n != node):
+            if matrix[n.idi,len(word)] <= toler:
+                if n.palabra != None:
+                    if n.palabra not in res:
+                        res.append(n.palabra)
 
+    return res
 
 
 

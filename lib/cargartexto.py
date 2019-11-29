@@ -36,10 +36,11 @@ def caller(file, tollerance,token):
 
 #main
 if __name__ == "__main__":
-    if len(sys.argv) == 4:
-        f = sys.argv[1] #fichero
-        k = sys.argv[2] #tolerancia
-        to = sys.argv[3] #token
-        caller(f,int(k),to)
-    else:
-        print("argumentos invalidos. Requerido nombre fichero, tolerancia, token")
+    #if len(sys.argv) == 4:
+        #f = sys.argv[1] #fichero
+        #k = sys.argv[2] #tolerancia
+        #to = sys.argv[3] #token
+        #caller(f,int(k),to)
+    caller("hola.txt",3,"hola")
+    #else:
+     #   print("argumentos invalidos. Requerido nombre fichero, tolerancia, token")
