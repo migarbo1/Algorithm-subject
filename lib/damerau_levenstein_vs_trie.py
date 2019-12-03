@@ -13,7 +13,6 @@ def damerau_levenstein_vs_trie(trie, word, toler):
  	
     node = trie.root()
     matrix= np.zeros(dtype = np.int8,shape = (len(trie.array)+1, len(word)+1))
-    cont = 0
     casTransp = False;
     matrix[node.idi, 0] = 0
     aux = 3000
@@ -28,21 +27,20 @@ def damerau_levenstein_vs_trie(trie, word, toler):
             fills = n.hijos.values();
             for f in fills:
                 if(ll < len(word)-1):
-                    if(f.letraLlegada == word[ll] and word[ll+1] == n.letraLlegada):
+                    if(f.letraLlegada == word[ll+1] and word[ll] == n.letraLlegada): 
                         casTransp = True;
-				
+                        				
 			
             if(node.idi != n.idi):
                 if(casTransp):
-                   aux = matrix[n.parent().idi, ll-2] #canvi lletres
+                        aux = matrix[n.nodoPadre.idi, ll-2] + 1#canvi lletres
                 matrix[n.idi, ll] = min(
                         matrix[n.idi, ll-1] + 1, #ins
                         matrix[n.nodoPadre.idi, ll] + 1, #borr
                         matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
                         aux  #esto hi ha que revisar-ho              
             			)            
-        cont += 1
-    
+     
     for n in trie.array:
         if(n != node):
             if matrix[n.idi,len(word)] <= toler:
