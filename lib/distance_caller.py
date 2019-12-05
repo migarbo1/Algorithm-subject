@@ -5,6 +5,7 @@
 import re
 import sys
 import os
+import copy
 from levenstein_distance import better_levenstein_distance
 from damerau_levenstein import damerau_levenstein_distance
 ##
@@ -72,3 +73,5 @@ if __name__ == "__main__":
         caller(f,int(k),to,int(m))
     else:
         print("argumentos invalidos. Requerido nombre fichero, tolerancia, token y modo")
+
+    

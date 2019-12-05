@@ -8,6 +8,7 @@ import os
 import TRie as trie
 import levenstein_vs_trie as lvt
 import damerau_levenstein_vs_trie as dlvt
+import damerau_levenstein as dl
 
 
 # clean text
@@ -41,6 +42,6 @@ if __name__ == "__main__":
         #k = sys.argv[2] #tolerancia
         #to = sys.argv[3] #token
         #caller(f,int(k),to)
-    caller("hola.txt",3,"hola")
+    caller("hola.txt",3,"hloa")
     #else:
      #   print("argumentos invalidos. Requerido nombre fichero, tolerancia, token")

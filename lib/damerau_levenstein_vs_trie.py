@@ -15,7 +15,6 @@ def damerau_levenstein_vs_trie(trie, word, toler):
     matrix= np.zeros(dtype = np.int8,shape = (len(trie.array)+1, len(word)+1))
     casTransp = False;
     matrix[node.idi, 0] = 0
-    aux = 3000
     res = []
 
     for ln in range(len(word)+1):
@@ -29,17 +28,25 @@ def damerau_levenstein_vs_trie(trie, word, toler):
                 if(ll < len(word)-1):
                     if(f.letraLlegada == word[ll+1] and word[ll] == n.letraLlegada): 
                         casTransp = True;
+                    else: 
+                        casTransp = False;
                         				
 			
             if(node.idi != n.idi):
-                if(casTransp):
-                        aux = matrix[n.nodoPadre.idi, ll-2] + 1#canvi lletres
-                matrix[n.idi, ll] = min(
-                        matrix[n.idi, ll-1] + 1, #ins
-                        matrix[n.nodoPadre.idi, ll] + 1, #borr
-                        matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
-                        aux  #esto hi ha que revisar-ho              
-            			)            
+                if(casTransp):                    
+                    matrix[n.idi, ll] = min(
+                            matrix[n.idi, ll-1] + 1, #ins
+                            matrix[n.nodoPadre.idi, ll] + 1, #borr
+                            matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
+                            matrix[n.nodoPadre.idi, ll-2] + 1 #canvi lletres                
+                			)
+                else:
+                    matrix[n.idi, ll] = min(
+                            matrix[n.idi, ll-1] + 1, #ins
+                            matrix[n.nodoPadre.idi, ll] + 1, #borr
+                            matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
+                            )
+                    
      
     for n in trie.array:
         if(n != node):
