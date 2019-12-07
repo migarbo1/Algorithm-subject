@@ -13,7 +13,7 @@ def langford_directo(N, allsolutions):
                                       #pot agafar una valor fins length de array - N -j -2, Exemple:si n=4, pot agafar posicions de 0 a 2, 
                                        #per tant arriba desde 0+4+1=5 fins a 7 posicio de: array length(8) - n(4) = 4 -j(0) = 4 - 2 = 2
                                         # amb n = 4 pot anar a les posicions 0,1,2
-                if(N2[j] == 0 && N2[j+num+1] == 0):   #si les posicions on vull posarles estan lliures, 
+                if(N2[j] == 0 and N2[j+num+1] == 0):   #si les posicions on vull posarles estan lliures, 
                                                         #pose el numero num i cride al backtracking reduint num en 1
                     N2[j] = num
                     N2[j+num+1] = num
