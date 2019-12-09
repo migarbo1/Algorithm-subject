@@ -9,15 +9,18 @@ def langford_directo(N, allsolutions):
         if num<=0:
             yield "-".join(map(str, seq))
         else:       #Com es un bucle provara totes les posicions disponibles i anirá ramificant
-        for j in range(0,len(N2)-num-j-2): # desde la primera posició del array fins a la maxima que puga tindre, per tant j 
-                                      #pot agafar una valor fins length de array - N -j -2, Exemple:si n=4, pot agafar posicions de 0 a 2, 
-                                       #per tant arriba desde 0+4+1=5 fins a 7 posicio de: array length(8) - n(4) = 4 -j(0) = 4 - 2 = 2
+        for j in range(0,len(N2)-num-1): # desde la primera posició del array fins a la maxima que puga tindre, per tant j 
+                                      #pot agafar una valor fins length de array - N -num -1, Exemple:si n=4, pot agafar posicions de 0 a 2, 
+                                       #per tant arriba desde 0+4+1=5 fins a 7 posicio de: array length(8) - n(4) = 4 -num(0) = 4 - 1 = 3
                                         # amb n = 4 pot anar a les posicions 0,1,2
-                if(N2[j] == 0 and N2[j+num+1] == 0):   #si les posicions on vull posarles estan lliures, 
+                if(seq[j] == 0 and seq[j+num+1] == 0):   #si les posicions on vull posarles estan lliures, 
                                                         #pose el numero num i cride al backtracking reduint num en 1
-                    N2[j] = num
-                    N2[j+num+1] = num
-                    backtracking(num-1)
+                    seq[j] = num
+                    seq[j+num+1] = num
+                    for i in backtracking(num-1):
+                        yield i
+                    seq[j] = 0
+                    seq[j+num+1] = 0
 
     if N%4 not in (0,3):
         yield "no hay solucion"
