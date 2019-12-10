@@ -12,23 +12,26 @@ from damerau_levenstein import damerau_levenstein_distance
 
 # clean text
 clean_re = re.compile('\W+')
+
 def clean_text(text):
     return clean_re.sub(' ', text)
 #fin clean text
 
 #funcion que llama para cada palabra del diccionario a la funcion de levenstein
 def caller(file, tollerance,token, mode):
-    file = open(file,"r")
-    text = file.read()
-    file.close()
-    text = clean_text(text)
-    text = text.lower()
-    text = text.split()
+    file = open(file,"r") # se abre el fichero
+    text = file.read() # leemos el fichero
+    file.close() # lo cerramos
+    text = clean_text(text) # eliminamos los caracteres no alfanumericos
+    text = text.lower() # minusculas
+    text = text.split() # separamos las palabras
     dictionary = {}
-    wordsPerDist = {}
-    for t in text:
-        dictionary[t] = dictionary.get(t,[])
-        if dictionary[t] == []:
+    wordsPerDist = {} # diccionario de distancias y palabras
+    print("Llenando diccionario")
+    for t in text: #anadimos las palabras al diccionario
+        d = dictionary.get(t,[])
+        if d == []: # evitamos repetidas
+            dictionary[t] = 1
             if mode == 1:
                 r = better_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
@@ -37,7 +40,7 @@ def caller(file, tollerance,token, mode):
                 r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
-    print(wordsPerDist)
+    print("Mostrando resultados")
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     for tol in range(0, int(tollerance) + 1):
         res = wordsPerDist.get(tol,[])
@@ -69,9 +72,7 @@ if __name__ == "__main__":
         f = sys.argv[1] #fichero
         k = sys.argv[2] #tolerancia
         to = sys.argv[3] #token
-        m = sys.argv[4] #modo
+        m = sys.argv[4] #modo 1 = normal, !1 damerou
         caller(f,int(k),to,int(m))
     else:
         print("argumentos invalidos. Requerido nombre fichero, tolerancia, token y modo")
-
-    
