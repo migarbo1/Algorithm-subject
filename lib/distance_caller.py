@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#! -*- encoding utf8
+#! -*- encoding utf8 -*-
 
 ## zona de imports
 import re
@@ -42,19 +42,21 @@ def caller(file, tollerance,token, mode):
                 wordsPerDist[r] += [t]
     print("Mostrando resultados")
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
+    aux1 = []
+    for k in sorted(wordsPerDist.keys()):
+        if k == 0:
+            aux1 = wordsPerDist[k]
+        else:
+            ak = k-1
+            aux1 += wordsPerDist[ak]
+            wordsPerDist[k] += copy.copy(aux1)
+        aux1 = []
+
     for tol in range(0, int(tollerance) + 1):
         res = wordsPerDist.get(tol,[])
         if not res == []:
             print("tolerancia: " + str(tol) + "\n" + "palabras: " + str(len(res)))
             print(res)
-    first = True
-    for k in wordsPerDist.keys():
-        if first:
-            aux1 = wordsPerDist[k]
-            first = False
-        else:
-            aux1 += wordsPerDist[k]
-        wordsPerDist[k] = copy.copy(aux1)
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     for tol in wordsPerDist.keys():
         if int(tol) >= tollerance+1:
