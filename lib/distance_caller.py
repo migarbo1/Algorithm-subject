@@ -33,13 +33,19 @@ def caller(file, tollerance,token, mode):
         if d == []: # evitamos repetidas
             dictionary[t] = 1
             if mode == 1:
-                r = better_levenstein_distance(t,token) ###aqui esta la llamada###
+                r = better_levenstein_distance(token,t) ###aqui esta la llamada###
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
             else:
-                r = damerau_levenstein_distance(t,token) ###aqui esta la llamada###
+                if(len(token)>=len(t)):
+                    r = damerau_levenstein_distance(token,t) ###aqui esta la llamada###
+                else:
+                    r = damerau_levenstein_distance(t,token)
+                if r <= tollerance:
+                     print(r, t)
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
+
     print("Mostrando resultados")
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     aux1 = []

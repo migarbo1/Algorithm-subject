@@ -33,4 +33,4 @@ def damerau_levenstein_distance(word1, word2):
                             p_row[i] + 1, #elemento de abajo en y
                             p_row[i - 1] + (word1[i - 1] != word2[j - 1]))
 
-    return c_row[len(word1)]
+    return c_row[-1]
