@@ -14,7 +14,7 @@ def damerau_levenstein_distance(word1, word2):
         c_row[i] = c_row[i - 1] + 1
 
     p_row,c_row = c_row,p_row
-    for i in range(1, len(word1) + 1): #caso j = 1 i > 0
+    for i in range(0, len(word1) + 1): #caso j = 1 i > 0
         c_row[i] = min(c_row[i - 1] + 1, #elemento anterior en eje x
                     p_row[i] + 1, #elemento de abajo en y
                     p_row[i - 1] + (word1[i - 1] != word2[0]))
