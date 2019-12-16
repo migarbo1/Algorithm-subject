@@ -8,6 +8,7 @@ import os
 import copy
 from levenstein_distance import better_levenstein_distance
 from damerau_levenstein import damerau_levenstein_distance
+import numpy as np
 ##
 
 # clean text
@@ -41,21 +42,22 @@ def caller(file, tollerance,token, mode):
                     r = damerau_levenstein_distance(token,t) ###aqui esta la llamada###
                 else:
                     r = damerau_levenstein_distance(t,token)
-                if r <= tollerance:
-                     print(r, t)
                 wordsPerDist[r] = wordsPerDist.get(r,[])
                 wordsPerDist[r] += [t]
 
     print("Mostrando resultados")
     #sobre el ultimo diccionario, recuperamos aquellas listas de palabras con clave <= tolerancia
     aux1 = []
-    for k in sorted(wordsPerDist.keys()):
-        if k == 0:
-            aux1 = wordsPerDist[k]
-        else:
-            ak = k-1
-            aux1 += wordsPerDist[ak]
-            wordsPerDist[k] += copy.copy(aux1)
+    for k in range(0, tollerance +1):
+        if k != 0:
+            ak = np.int8(k-1)
+            aux1 += wordsPerDist.get(ak,[])
+            if aux1 != []:
+                aux2 = wordsPerDist.get(k,[])
+                if aux2 == []:
+                    wordsPerDist[k] = copy.copy(aux1)
+                else:
+                    wordsPerDist[k] += copy.copy(aux1)
         aux1 = []
 
     for tol in range(0, int(tollerance) + 1):
