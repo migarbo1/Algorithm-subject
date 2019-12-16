@@ -11,56 +11,38 @@ import TRie
 
 def damerau_levenstein_vs_trie(trie, word, toler):
  	
-    node = trie.root()
+    nodo = trie.nodoRaiz
     matrix= np.zeros(dtype = np.int8,shape = (len(trie.array)+1, len(word)+1))
-    casTransp = False;
-    matrix[node.idi, 0] = 0
     res = []
 
-    for ln in range(len(word)+1):
-        matrix[node.idi, ln] = ln
+    matrix[nodo.idi, 0] = 0 #case 1
+
+    for ln in range(1, len(word)+1): #case 2
+        matrix[nodo.idi, ln] = ln
  	
     for n in trie.array:
-        matrix[n.idi, 0] = n.profundidad
-        for ll in range(len(word)+1):
-            fills = n.hijos.values();
-            for f in fills:
-                if(ll < len(word)-1):
-                    if(f.letraLlegada == word[ll+1] and word[ll] == n.letraLlegada): 
-                        casTransp = True;
-                    else: 
-                        casTransp = False;
-                        				
-			
-            if(node.idi != n.idi):
-                if(casTransp):                    
-                    matrix[n.idi, ll] = min(
-                            matrix[n.idi, ll-1] + 1, #ins
-                            matrix[n.nodoPadre.idi, ll] + 1, #borr
-                            matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
-                            matrix[n.nodoPadre.idi, ll-2] + 1 #canvi lletres                
-                			)
+        if n != nodo:
+            matrix[n.idi,0] = n.profundidad #case 3
+            for i in range (1,len(word) + 1):
+                if (word[i-1] == n.nodoPadre.letraLlegada and word[i-2] == n.letraLlegada) and n.nodoPadre.nodoPadre != None:
+                    matrix[n.idi,i] = min(
+                        matrix[n.idi,i - 1] + 1,
+                        matrix[n.nodoPadre.idi,i] + 1,
+                        matrix[n.nodoPadre.idi,i - 1] + (word[i-1] != n.letraLlegada),
+                        matrix[n.nodoPadre.nodoPadre.idi,i - 2] + 1
+                    )
                 else:
-                    matrix[n.idi, ll] = min(
-                            matrix[n.idi, ll-1] + 1, #ins
-                            matrix[n.nodoPadre.idi, ll] + 1, #borr
-                            matrix[n.nodoPadre.idi, ll - 1] + (word[ll-1] != n.letraLlegada), #sust
-                            )
-                    
+                    matrix[n.idi,i] = min(
+                        matrix[n.idi,i - 1] + 1,
+                        matrix[n.nodoPadre.idi,i] + 1,
+                        matrix[n.nodoPadre.idi,i - 1] + (word[i-1] != n.letraLlegada)
+                    )
      
     for n in trie.array:
-        if(n != node):
-            if matrix[n.idi,len(word)] <= toler:
+        if(n != nodo):
+            if matrix[n.idi,-1] <= toler:
                 if n.palabra != None:
                     if n.palabra not in res:
                         res.append(n.palabra)
 
     return res
-
-
-
-
-
-
-    
-

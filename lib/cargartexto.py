@@ -29,10 +29,10 @@ def caller(file, tollerance,token):
     trio = trie.trie()
     for t in text:
         trio.insertarPalabra(t)
-    print("sin damerou")
-    aux = lvt.levenstein_vs_trie(trio, token, tollerance)
+    #aux = lvt.levenstein_vs_trie(trio, token, tollerance)
+    aux = dlvt.damerau_levenstein_vs_trie(trio,token,tollerance)
     print(len(aux))
-    print(aux)
+    #print(aux)
     #print("++++++++++++++++++++++++con dameury++++++++++++++++++")
     #print(dlvt.damerau_levenstein_vs_trie(trio, token, tollerance))
 #fin de la funcion levenstein_caller
