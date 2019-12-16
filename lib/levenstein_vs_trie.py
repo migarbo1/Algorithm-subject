@@ -14,31 +14,31 @@
 
 #zona de imports
 import numpy as np
-import TRie as trie
+import TRie
 
 def levenstein_vs_trie(trie, palabra, k):
-    nodo = trie.root()
+    nodo = trie.nodoRaiz
     matrix = np.zeros(dtype=np.int8, shape=(len(trie.array) + 1, len(palabra) + 1)) #creamos una matriz de nodos (filas) por simbolos de la palabra (columnas)
     result = []
 
     matrix[nodo.idi,0] = 0 #case 1
 
-    for i in range(len(palabra)+1): #case 2
+    for i in range(1,len(palabra)+1): #case 2
         matrix[nodo.idi,i] = i
 
-    for n in trie.array: #case 3
-        matrix[n.idi,0] = n.profundidad
-        for i  in range(len(palabra) + 1):
-            if (nodo.idi != n.idi):
+    for n in trie.array:
+        if(n != nodo):
+            matrix[n.idi,0] = n.profundidad#case 3
+            for i  in range(1,len(palabra) + 1):#case 4
                 matrix[n.idi,i] = min(
                     matrix[n.idi,i - 1] + 1,
                     matrix[n.nodoPadre.idi,i] + 1,
-                    matrix[n.nodoPadre.idi,i - 1] + (palabra[i-1] != n.char())
+                    matrix[n.nodoPadre.idi,i - 1] + (palabra[i-1] != n.letraLlegada)
                 )
 
     for n in trie.array:
         if(n != nodo):
-            if matrix[n.idi,len(palabra)] <= k:
+            if matrix[n.idi,-1] <= k:
                 if n.palabra != None:
                     if n.palabra not in result:
                         result.append(n.palabra)

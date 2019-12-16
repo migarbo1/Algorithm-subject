@@ -21,11 +21,11 @@ class nodo:
     def devolverHijo(self, letra):
         return self.hijos.get(letra, 0)
 
-    def char(self): #dado un nodo devuelve el caracter con el que se ha llegado al nodo
-        return self.letraLlegada
+    #def char(self): #dado un nodo devuelve el caracter con el que se ha llegado al nodo
+        #return self.letraLlegada
 
-    def parent(self): #dado un nodo devuelve padre
-        return self.nodoPadre
+    #def parent(self): #dado un nodo devuelve padre
+        #return self.nodoPadre
 
     #def profundidad(self): #dado un nodo devuelve la profundidad
         #return self.profundidad
@@ -33,7 +33,7 @@ class nodo:
     #def sacarPalabra(self): #dado un nodo devuelve la palabra
         #return self.palabra
 # tenemos que hacer iun if para ver si algo es none xd
-# haser to stringos 
+# haser to stringos
 class trie:
 
     def __init__(self):
@@ -43,18 +43,18 @@ class trie:
 
     def insertarPalabra(self, palabra):
         nodoActual = self.nodoRaiz  #empezamos por la raiz
-        for l in palabra:       #recorremos la palabra
+        for l in range(len(palabra)):       #recorremos la palabra
             palabraaux = None
-            res = nodoActual.devolverHijo(l)
+            res = nodoActual.devolverHijo(palabra[l])
             if res == 0:            #si hijo no existe con esa letra
-                if l == palabra[-1]:    # si ultima letra de la palabra
+                if l == len(palabra)-1:    # si ultima letra de la palabra
                     palabraaux = palabra    #sustituimos None por palabra
-                nodoActual = nodoActual.insertarHijo(l, palabraaux, len(self.array)+1)     # insertamos hijo nuevo con letra que falta y palabra si es ultimo
+                nodoActual = nodoActual.insertarHijo(palabra[l], palabraaux, len(self.array)+1)     # insertamos hijo nuevo con letra que falta y palabra si es ultimo
                 self.array += [nodoActual]
-                
+
             else:
                 nodoActual = res
-                if l == palabra[-1]:    # si ultima letra de la palabra
+                if l ==  len(palabra)-1:    # si ultima letra de la palabra
                     palabraaux = palabra    #sustituimos None por palabra
                     nodoActual.definirPalabra(palabraaux)
 

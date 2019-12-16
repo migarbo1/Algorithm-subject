@@ -30,18 +30,19 @@ def caller(file, tollerance,token):
     for t in text:
         trio.insertarPalabra(t)
     print("sin damerou")
-    print(lvt.levenstein_vs_trie(trio, token, tollerance))
-    print("++++++++++++++++++++++++con dameury++++++++++++++++++")
-    print(dlvt.damerau_levenstein_vs_trie(trio, token, tollerance))
+    aux = lvt.levenstein_vs_trie(trio, token, tollerance)
+    print(len(aux))
+    print(aux)
+    #print("++++++++++++++++++++++++con dameury++++++++++++++++++")
+    #print(dlvt.damerau_levenstein_vs_trie(trio, token, tollerance))
 #fin de la funcion levenstein_caller
 
 #main
 if __name__ == "__main__":
-    #if len(sys.argv) == 4:
-        #f = sys.argv[1] #fichero
-        #k = sys.argv[2] #tolerancia
-        #to = sys.argv[3] #token
-        #caller(f,int(k),to)
-    caller("hola.txt",3,"hloa")
-    #else:
-     #   print("argumentos invalidos. Requerido nombre fichero, tolerancia, token")
+    if len(sys.argv) == 4:
+        f = sys.argv[1] #fichero
+        k = sys.argv[2] #tolerancia
+        to = sys.argv[3] #token
+        caller(f,int(k),to)
+    else:
+        print("argumentos invalidos. Requerido nombre fichero, tolerancia, token")
