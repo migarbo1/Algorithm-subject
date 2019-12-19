@@ -51,6 +51,7 @@ def levenstein_vs_trie_ramificacion(trie, palabra, k):
 
         #ponicion en el result
         if(d <= k and nodo.palabra != None):
-            result.append(nodo.palabra)
+            if(nodo.palabra not in result):
+                result.append(nodo.palabra)
 
     return result
