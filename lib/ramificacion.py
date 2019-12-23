@@ -35,11 +35,11 @@ def levenstein_vs_trie_ramificacion(trie, palabra, k):
                 lista.append((i,nn.idi ,d+1))
 
         #borracion
-        if(d+1 <= k and i < len(palabra)):
+        if(d+1 <= k and i < len(palabra)): # ojo que aquí podría ir un <=, no lo se
             lista.append((i+1,nodo.idi ,d+1))
 
         #sustitutusao
-        if(d <= k and len(nodo.hijos) > 0 and i < len(palabra)):
+        if(d <= k and len(nodo.hijos) > 0 and i < len(palabra)): #aqui no puede ir un <= poque si no palabra[i] hace pum pum
             for x in nodo.hijos.keys():
                 nn = nodo.hijos.get(x, 0)
                 if nn.letraLlegada != None:

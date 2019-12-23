@@ -16,42 +16,51 @@
 import numpy as np
 import TRie as trie
 
-def levenstein_vs_trie_ramificacion(trie, palabra, k):
-    lista = [(0,0,0)] # (elementode la plalabra, nodo, distancia a mi coraxon)
+def levenstein_vs_trie_ramificacionD(trie, palabra, k):
+    lista = [(0,0,0)]
     nodo = trie.root()
     result = []
 
-    while(len(lista)):
+    while (len(lista)):
         i,n,d = lista.pop()
-        nodo = trie.array[n]
-        #insercion
-        if(d+1 <= k and len(nodo.hijos) > 0):
-            for x in nodo.hijos.keys:
-                if(x != palabra[i]):
-                    nn = nodo.hijos.get(x, 0)
-                    lista.append((i,nn.idi,d+1))
-        
-        #borracion
-         if(d+1 <= k and i < len(palabra)):
-            lista.append((i+1,nodo,d+1))
 
-        #sustitutusao
-        if(d <= k and len(nodo.hijos) > 0 and i <= len(palabra)):   #Esta mal, te que ser menor estricte, ja que no pots estar en la posicio: paraula[len(praula)], si comença desde 0
-            for x in nodo.hijos.keys:
+        if n == 0:
+            nodo = trie.array[n]
+        else:
+            nodo = trie.array[n-1]
+        
+        #insercion
+        if(d+1 <= k and i <= len(palabra) and len(nodo.hijos) > 0):
+            for x in nodo.hijos.keys():
+                nn = nodo.hijos.get(x,0)
+                lista.append((i,nn.idi,d+1))
+        
+        #borrado
+        if(d+1 <= k and i < len(palabra)):
+            lista.append((i+1,nodo.idi, d+1))
+
+        #sustitucion
+        if(d <= k and len(nodo.hijos) > 0 and i < len(palabra)):
+            for x in nodo.hijos.keys():
                 nn = nodo.hijos.get(x, 0)
-                lista.append((i+1,nn.idi,d + (palabra[i] != x))
+                if nn.letraLlegada != None:
+                    lista.append((i+1,nn.idi,d + (palabra[i] != nn.letraLlegada)))
+                else:
+                    lista.append((i,nn.idi,d))
 
         #vueltacionNietos
         if(d+1 <= k and len(nodo.hijos) > 0 and i+1 < len(palabra)):
-            for x in nodo.hijos.keys:
-                if(x == palabra[i+1]):
-                    for y in x.hijos.keys:
-                        if(y == palabra[i]):
-                            lista.append((i+2,y,d+1))
+            for x in nodo.hijos.keys():
+                nn = nodo.hijos.get(x,0)
+                if(nn.letraLlegada == palabra[i+1]):
+                    for y in nn.hijos.keys():
+                        nietos = nn.hijos.get(y,0)
+                        if(nietos.letraLlegada == palabra[i]):
+                            lista.append((i+2,nietos.idi,d+1))
 
-        #ponicion en el result
-        if(d <= k and nodo.palabra != None):
-            if(nodo.palabra not in result):
+        #result
+        if(d <= k and nodo.palabra != None and (i == len(palabra))):
+            if nodo.palabra not in result:
                 result.append(nodo.palabra)
 
     return result

@@ -9,8 +9,7 @@ import TRie as trie
 import levenstein_vs_trie as lvt
 import damerau_levenstein_vs_trie as dlvt
 import damerau_levenstein as dl
-import ramificacion as ram
-import putamierda as pt
+import ramificacionDamerau as ram
 
 
 # clean text
@@ -33,7 +32,7 @@ def caller(file, tollerance,token):
         trio.insertarPalabra(t)
     #aux = lvt.levenstein_vs_trie(trio, token, tollerance)
     #aux = dlvt.damerau_levenstein_vs_trie(trio,token,tollerance)
-    aux = ram.levenstein_vs_trie_ramificacion(trio, token, tollerance)
+    aux = ram.levenstein_vs_trie_ramificacionD(trio, token, tollerance)
     print(len(aux))
     print(aux)
     #print("++++++++++++++++++++++++con dameury++++++++++++++++++")
