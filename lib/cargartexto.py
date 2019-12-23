@@ -10,6 +10,7 @@ import levenstein_vs_trie as lvt
 import damerau_levenstein_vs_trie as dlvt
 import damerau_levenstein as dl
 import ramificacion as ram
+import putamierda as pt
 
 
 # clean text

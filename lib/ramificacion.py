@@ -22,44 +22,33 @@ def levenstein_vs_trie_ramificacion(trie, palabra, k):
     result = []
     while(len(lista)):
         i,n,d = lista.pop()
+
         if n == 0:
             nodo = trie.array[n]
         else:
             nodo = trie.array[n-1]
+
         #insercion
-        if(d+1 <= k and len(nodo.hijos) > 0 and i < len(palabra)):
+        if(d+1 <= k and len(nodo.hijos) > 0 and i <= len(palabra)):
             for x in nodo.hijos.keys():
-                if(x != palabra[i]):
-                    nn = nodo.hijos.get(x, 0)
-                    lista.append((i,nn.idi ,d+1))
-                    if(d+1 <= k and nn.palabra != None and i == len(palabra)):
-                        print(nn.palabra)
-                        print(d+1)
-                        if(nn.palabra not in result):
-                            result.append(nn.palabra)
+                nn = nodo.hijos.get(x, 0)
+                lista.append((i,nn.idi ,d+1))
 
         #borracion
         if(d+1 <= k and i < len(palabra)):
             lista.append((i+1,nodo.idi ,d+1))
-            if(d+1 <= k and nodo.palabra != None and i+1 == len(palabra)):
-                        print(nn.palabra)
-                        print(d+1)
-                        if(nodo.palabra not in result):
-                            result.append(nodo.palabra)
-        
+
         #sustitutusao
         if(d <= k and len(nodo.hijos) > 0 and i < len(palabra)):
             for x in nodo.hijos.keys():
                 nn = nodo.hijos.get(x, 0)
-                if nodo.letraLlegada != None:
-                    lista.append((i+1,nn.idi,d + (palabra[i] != nodo.letraLlegada)))
-                    if(d+(palabra[i] != nodo.letraLlegada) <= k and nodo.palabra != None and i+1 == len(palabra)):
-                        print(nodo.palabra)
-                        print(d+(palabra[i] != nodo.letraLlegada))
-                        if(nodo.palabra not in result):
-                            result.append(nodo.palabra)
-                else: 
+                if nn.letraLlegada != None:
+                    lista.append((i+1,nn.idi,d + (palabra[i] != nn.letraLlegada)))
+                else:
                     lista.append((i,nn.idi,d))
-                
+
+        if(d <= k and nodo.palabra != None and (i == len(palabra))):
+            if nodo.palabra not in result:
+                result.append(nodo.palabra)
 
     return result
