@@ -20,6 +20,7 @@ def levenstein_vs_trie_ramificacionD(trie, palabra, k):
     lista = [(0,0,0)]
     nodo = trie.root()
     result = []
+    evitreps = {}
 
     while (len(lista)):
         i,n,d = lista.pop()
@@ -28,13 +29,13 @@ def levenstein_vs_trie_ramificacionD(trie, palabra, k):
             nodo = trie.array[n]
         else:
             nodo = trie.array[n-1]
-        
+
         #insercion
         if(d+1 <= k and i <= len(palabra) and len(nodo.hijos) > 0):
             for x in nodo.hijos.keys():
                 nn = nodo.hijos.get(x,0)
                 lista.append((i,nn.idi,d+1))
-        
+
         #borrado
         if(d+1 <= k and i < len(palabra)):
             lista.append((i+1,nodo.idi, d+1))
@@ -60,7 +61,9 @@ def levenstein_vs_trie_ramificacionD(trie, palabra, k):
 
         #result
         if(d <= k and nodo.palabra != None and (i == len(palabra))):
-            if nodo.palabra not in result:
+            cosa = evitreps.get(nodo.palabra, 0)
+            if cosa == 0:
+                evitreps[nodo.palabra] = 1
                 result.append(nodo.palabra)
 
     return result

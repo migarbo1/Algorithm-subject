@@ -20,6 +20,7 @@ def levenstein_vs_trie_ramificacion(trie, palabra, k):
     lista = [(0,0,0)] # (elementode la plalabra, nodo, distancia a mi coraxon)
     nodo = trie.root()
     result = []
+    evitreps = {}
     while(len(lista)):
         i,n,d = lista.pop()
 
@@ -48,7 +49,9 @@ def levenstein_vs_trie_ramificacion(trie, palabra, k):
                     lista.append((i,nn.idi,d))
 
         if(d <= k and nodo.palabra != None and (i == len(palabra))):
-            if nodo.palabra not in result:
+            cosa = evitreps.get(nodo.palabra, 0)
+            if cosa == 0:
+                evitreps[nodo.palabra] = 1
                 result.append(nodo.palabra)
 
     return result
