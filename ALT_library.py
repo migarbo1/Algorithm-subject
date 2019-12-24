@@ -13,6 +13,17 @@ clean_re = re.compile('\W+')
 def clean_text(text):
     return clean_re.sub(' ', text)
 
+#LEER
+def leer_texto(file):
+        file = open(file,"r")
+        text = file.read()
+        file.close()
+        text = clean_text(text)
+        text = text.lower()
+        text = text.split()
+        text = sorted(text)
+        return text
+
 #CARGAR
 def load_object(file_name):
     with open (file_name, 'rb') as fh:
@@ -73,14 +84,7 @@ class trie:
     def root(self): #para tener el nodo inicial del trie
         return self.nodoRaiz
 
-    def insertarTexto(self, file):
-        file = open(file,"r")
-        text = file.read()
-        file.close()
-        text = clean_text(text)
-        text = text.lower()
-        text = text.split()
-        text = sorted(text)
+    def insertarTexto(self, text):
         for t in text:
             self.insertarPalabra(t)
 
