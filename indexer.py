@@ -13,6 +13,7 @@ import pickle
 import re
 import sys
 import os
+import ALT_library as libo
 
 # cada doc: {'article': ' ','url' 'date' 'keywords' 'id': '', 'summary': '', 'title':''}, {'article'...
 #guardar un objecte(índex) en un fitxer
@@ -42,6 +43,8 @@ def indexer(folder,fitxerGuardat):
     permutemDicTitle = {}
     permutemDicKeywords = {}
     permutemDicSummary = {}
+
+    tri = libo.trie()
 
     for dirname, subdirs, files in os.walk(folder): #"paseja" per la carpeta
         for filename in files: #agafa els fitxers
@@ -233,6 +236,11 @@ def indexer(folder,fitxerGuardat):
 
 
         #creación del objeto y guardado del mismo.
+    tri.insertarTexto(postingListTerms.keys())
+    tri.insertarTexto(postingListTitle.keys())
+    tri.insertarTexto(postingListSummary.keys())
+    tri.insertarTexto(postingListKeywords.keys())
+    tri.guardar("eltrie")
     objecte = [dDocs, dArticles, postingListTerms, postingListTitle, postingListSummary, postingListKeywords, postingListDate, permutemDicSummary,permutemDicDate,permutemDicTitle,permutemDicKeywords,permutemDicArticle]
     save_object(objecte, fitxerGuardat)
 
