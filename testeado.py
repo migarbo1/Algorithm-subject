@@ -9,63 +9,150 @@ tri = libo.trie()
 tri.insertarTexto(text)
 print("Texto cargado")
 
-start = time.time()
-libo.levenstein_vs_trie(tri,"casa",1)
-end = time.time()
-tim = (end-start)
-print("LEVENSTEIN VS TRIE 1: ", tim)
+print("Tiempos de aplicación de Levenstein: ")
+
+############### cadena vs cadena ####################
 
 start = time.time()
-libo.levenstein_vs_trie(tri,"casa",2)
+for t in text:
+    libo.better_levenstein_distance(t,"xi")
 end = time.time()
 tim = (end-start)
-print("LEVENSTEIN VS TRIE 2: ", tim)
+print("Levenstein cadena vs cadena: palabra xi : " + str(tim))
 
 start = time.time()
-libo.levenstein_vs_trie(tri,"casa",3)
+for t in text:
+    libo.better_levenstein_distance(t,"casa")
 end = time.time()
 tim = (end-start)
-print("LEVENSTEIN VS TRIE 3: ", tim)
+print("Levenstein cadena vs cadena: palabra casa : " + str(tim))
 
 start = time.time()
-libo.levenstein_vs_trie(tri,"casa",4)
+for t in text:
+    libo.better_levenstein_distance(t,"constitución")
 end = time.time()
 tim = (end-start)
-print("LEVENSTEIN VS TRIE 4: ", tim)
+print("Levenstein cadena vs cadena: palabra constitución : " + str(tim))
+
+################# trie básico ####################
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie(tri,"xi",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE: Palabra xi, Tolerancia " + str(i) + " : " + str(tim))
+
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie(tri,"casa",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE: Palabra casa, Tolerancia " + str(i) + " : " + str(tim))
+
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie(tri,"constitución",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE: Palabra constitución, Tolerancia " + str(i) + " : " + str(tim))
+
+################# trie con ramificación ###################
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacion(tri,"xi",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia " + str(i) + " : " + str(tim))
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacion(tri,"casa",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra casa, Tolerancia " + str(i) + " : " + str(tim))
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacion(tri,"constitución",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia " + str(i) + " : " + str(tim))
+
+##################################################################################################################################
+##################################################################################################################################
+
+print("Tiempos de aplicación de Damerau-Leventein")
+
+############### cadena vs cadena ####################
 
 start = time.time()
-libo.levenstein_vs_trie(tri,"casa",5)
+for t in text:
+    libo.damerau_levenstein_distance(t,"xi")
 end = time.time()
 tim = (end-start)
-print("LEVENSTEIN VS TRIE 5: ", tim)
+print("Damerau-Levenstein cadena vs cadena: palabra xi : " + str(tim))
 
 
 start = time.time()
-libo.damerau_levenstein_vs_trie(tri,"casa",1)
+for t in text:
+    libo.damerau_levenstein_distance(t,"casa")
 end = time.time()
 tim = (end-start)
-print("DAMEROU-LEVENSTEIN VS TRIE 1: ", tim)
+print("Damerau-Levenstein cadena vs cadena: palabra casa : " + str(tim))
+
 
 start = time.time()
-libo.damerau_levenstein_vs_trie(tri,"casa",2)
+for t in text:
+    libo.damerau_levenstein_distance(t,"constitución")
 end = time.time()
 tim = (end-start)
-print("DAMEROU-LEVENSTEIN VS TRIE 2: ", tim)
+print("Damerau-Levenstein cadena vs cadena: palabra constitución : " + str(tim))
 
-start = time.time()
-libo.damerau_levenstein_vs_trie(tri,"casa",3)
-end = time.time()
-tim = (end-start)
-print("DAMEROU-LEVENSTEIN VS TRIE 3: ", tim)
+################# trie básico ####################
 
-start = time.time()
-libo.damerau_levenstein_vs_trie(tri,"casa",4)
-end = time.time()
-tim = (end-start)
-print("DAMEROU-LEVENSTEIN VS TRIE 4: ", tim)
+for i in range(0,5):
+    start = time.time()
+    libo.damerau_levenstein_vs_trie(tri,"xi",i)
+    end = time.time()
+    tim = (end-start)
+    print("DAMEROU-LEVENSTEIN VS TRIE: palabra xi, TOlerancia " + str(i) + " : " + str(tim))
 
-start = time.time()
-libo.damerau_levenstein_vs_trie(tri,"casa",5)
-end = time.time()
-tim = (end-start)
-print("DAMEROU-LEVENSTEIN VS TRIE 5: ", tim)
+for i in range(0,5):
+    start = time.time()
+    libo.damerau_levenstein_vs_trie(tri,"casa",i)
+    end = time.time()
+    tim = (end-start)
+    print("DAMEROU-LEVENSTEIN VS TRIE: palabra casa, TOlerancia " + str(i) + " : " + str(tim))
+
+for i in range(0,5):
+    start = time.time()
+    libo.damerau_levenstein_vs_trie(tri,"constitución",i)
+    end = time.time()
+    tim = (end-start)
+    print("DAMEROU-LEVENSTEIN VS TRIE: palabra constitución, TOlerancia " + str(i) + " : " + str(tim))
+
+################# trie con ramificación ###################
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacionD(tri,"xi",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia " + str(i) + " : " + str(tim))
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacionD(tri,"casa",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra casa, Tolerancia " + str(i) + " : " + str(tim))
+
+for i in range(0,5):
+    start = time.time()
+    libo.levenstein_vs_trie_ramificacionD(tri,"constitución",i)
+    end = time.time()
+    tim = (end-start)
+    print("LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia " + str(i) + " : " + str(tim))
