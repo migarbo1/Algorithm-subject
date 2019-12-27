@@ -3,6 +3,15 @@ tiempos de aplicación de Levenstein:
 Levenstein cadena vs cadena: palabra xi : 43.595478534698486
 Levenstein cadena vs cadena: palabra casa : 81.84028816223145
 Levenstein cadena vs cadena: palabra constitución : 231.5144076347351
+
+lev = [43.595478534698486 81.84028816223145 231.5144076347351]
+levd = [49.027955532073975 85.74682140350342 237.6088089942932]
+plot([2,4,12],lev,"linewidth",2,[2,4,12],levd,"linewidth",2)
+ylabel("Segundos")
+xlabel("Longitud de la palabra")
+legend("Levenstein","Damerou-Levenstein")
+title("Palabra contra palabra")
+
 LEVENSTEIN VS TRIE: Palabra xi, Tolerancia 0 : 1.5098731517791748
 LEVENSTEIN VS TRIE: Palabra xi, Tolerancia 1 : 1.433018684387207
 LEVENSTEIN VS TRIE: Palabra xi, Tolerancia 2 : 2.2115962505340576
@@ -18,6 +27,25 @@ LEVENSTEIN VS TRIE: Palabra constitución, Tolerancia 1 : 7.955496311187744
 LEVENSTEIN VS TRIE: Palabra constitución, Tolerancia 2 : 7.367595911026001
 LEVENSTEIN VS TRIE: Palabra constitución, Tolerancia 3 : 7.417987108230591
 LEVENSTEIN VS TRIE: Palabra constitución, Tolerancia 4 : 7.30030369758606
+
+xi = [1.5098731517791748 1.433018684387207 2.2115962505340576 1.8108408451080322 1.9092559814453125]
+casa = [2.329634428024292 2.547391176223755 2.535736322402954 2.729060411453247 2.7701799869537354]
+constitucion = [8.095937013626099 7.955496311187744 7.367595911026001 7.417987108230591 7.30030369758606]
+
+plot([0 1 2 3 4],xi,"linewidth",2,[0 1 2 3 4],casa,"linewidth",2,[0 1 2 3 4],constitucion,"linewidth",2)
+ylabel("Segundos")
+xlabel("Tolerancia")
+legend("xi","casa","constitucion")
+title("Levenstein vs Trie")
+
+a = [xi;casa;constitucion]
+
+plot([2,4,12],a(:,1),"linewidth",2,[2,4,12],a(:,2),"linewidth",2,[2,4,12],a(:,3),"linewidth",2,[2,4,12],a(:,4),"linewidth",2,[2,4,12],a(:,5),"linewidth",2)
+legend("Tolerancia 0","Tolerancia 1","Tolerancia 2","Tolerancia 3","Tolerancia 4", "location","northwest")
+ylabel("Segundos")
+xlabel("Longitud de la palabra")
+title("Levenstein vs Trie")
+
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 0 : 6.699562072753906e-05
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 1 : 0.0006117820739746094
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 2 : 0.00677180290222168
@@ -34,10 +62,31 @@ LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Toleranc
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia 3 : 0.1544184684753418
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia 4 : 0.7800450325012207
 
+xi = [6.699562072753906e-05 0.0006117820739746094 0.00677180290222168 0.0343019962310791 0.14398479461669922]
+casa = [7.009506225585938e-05 0.0013391971588134766 0.015286684036254883 0.10451340675354004 0.6977822780609131]
+constitucion = [0.00018835067749023438 0.0023643970489501953 0.023583173751831055 0.1544184684753418 0.7800450325012207]
+
+plot([0 1 2 3 4],xi,"linewidth",2,[0 1 2 3 4],casa,"linewidth",2,[0 1 2 3 4],constitucion,"linewidth",2)
+ylabel("Segundos")
+xlabel("Tolerancia")
+legend("xi","casa","constitucion")
+title("Levenstein vs Trie con ramificación")
+
+a = [xi;casa;constitucion]
+
+plot([2,4,12],a(:,1),"linewidth",2,[2,4,12],a(:,2),"linewidth",2,[2,4,12],a(:,3),"linewidth",2,[2,4,12],a(:,4),"linewidth",2,[2,4,12],a(:,5),"linewidth",2)
+legend("Tolerancia 0","Tolerancia 1","Tolerancia 2","Tolerancia 3","Tolerancia 4", "location","northwest")
+ylabel("Segundos")
+xlabel("Longitud de la palabra")
+title("Levenstein vs Trie con ramificacion")
+
+
 Tiempos de aplicación de Damerau-Leventein
 Damerau-Levenstein cadena vs cadena: palabra xi : 49.027955532073975
 Damerau-Levenstein cadena vs cadena: palabra casa : 85.74682140350342
 Damerau-Levenstein cadena vs cadena: palabra constitución : 237.6088089942932
+
+
 DAMEROU-LEVENSTEIN VS TRIE: palabra xi, TOlerancia 0 : 1.4137372970581055
 DAMEROU-LEVENSTEIN VS TRIE: palabra xi, TOlerancia 1 : 1.2106804847717285
 DAMEROU-LEVENSTEIN VS TRIE: palabra xi, TOlerancia 2 : 1.21797776222229
@@ -53,6 +102,25 @@ DAMEROU-LEVENSTEIN VS TRIE: palabra constitución, TOlerancia 1 : 7.952161550521
 DAMEROU-LEVENSTEIN VS TRIE: palabra constitución, TOlerancia 2 : 7.651959180831909
 DAMEROU-LEVENSTEIN VS TRIE: palabra constitución, TOlerancia 3 : 7.859046220779419
 DAMEROU-LEVENSTEIN VS TRIE: palabra constitución, TOlerancia 4 : 8.17840838432312
+
+xi = [1.4137372970581055 1.2106804847717285 1.21797776222229 1.5145885944366455 1.5515937805175781]
+casa = [3.0410590171813965 2.7950048446655273 2.823713779449463 2.3548521995544434 2.9881479740142822]
+constitucion = [7.505453824996948 7.952161550521851 7.651959180831909 7.859046220779419 8.17840838432312]
+
+plot([0 1 2 3 4],xi,"linewidth",2,[0 1 2 3 4],casa,"linewidth",2,[0 1 2 3 4],constitucion,"linewidth",2)
+ylabel("Segundos")
+xlabel("Tolerancia")
+legend("xi","casa","constitucion")
+title("Damerou-Levenstein vs Trie")
+
+a = [xi;casa;constitucion]
+
+plot([2,4,12],a(:,1),"linewidth",2,[2,4,12],a(:,2),"linewidth",2,[2,4,12],a(:,3),"linewidth",2,[2,4,12],a(:,4),"linewidth",2,[2,4,12],a(:,5),"linewidth",2)
+legend("Tolerancia 0","Tolerancia 1","Tolerancia 2","Tolerancia 3","Tolerancia 4", "location","northwest")
+ylabel("Segundos")
+xlabel("Longitud de la palabra")
+title("Damerou-Levenstein vs Trie")
+
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 0 : 7.772445678710938e-05
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 1 : 0.0008046627044677734
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra xi, Tolerancia 2 : 0.0076770782470703125
@@ -68,4 +136,22 @@ LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Toleranc
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia 2 : 0.018088579177856445
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia 3 : 0.13078951835632324
 LEVENSTEIN VS TRIE con ramificación de estados: Palabra constitución, Tolerancia 4 : 0.9950344562530518
+
+xi = [7.772445678710938e-05 0.0008046627044677734 0.0076770782470703125 0.04367256164550781 0.17025089263916016]
+casa = [9.34600830078125e-05 0.0014929771423339844 0.03896474838256836 0.19397950172424316 0.7230730056762695]
+constitucion = [0.00011610984802246094 0.0018694400787353516 0.018088579177856445 0.13078951835632324 0.9950344562530518]
+
+plot([0 1 2 3 4],xi,"linewidth",2,[0 1 2 3 4],casa,"linewidth",2,[0 1 2 3 4],constitucion,"linewidth",2)
+ylabel("Segundos")
+xlabel("Tolerancia")
+legend("xi","casa","constitucion")
+title("Damerou-Levenstein vs Trie con ramificación")
+
+a = [xi;casa;constitucion]
+
+plot([2,4,12],a(:,1),"linewidth",2,[2,4,12],a(:,2),"linewidth",2,[2,4,12],a(:,3),"linewidth",2,[2,4,12],a(:,4),"linewidth",2,[2,4,12],a(:,5),"linewidth",2)
+legend("Tolerancia 0","Tolerancia 1","Tolerancia 2","Tolerancia 3","Tolerancia 4", "location","northwest")
+ylabel("Segundos")
+xlabel("Longitud de la palabra")
+title("Damerou-Levenstein vs Trie con ramificacion")
 
