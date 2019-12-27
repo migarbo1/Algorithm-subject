@@ -12,6 +12,7 @@ import re
 import sys
 import json
 import pickle
+import ALT_library as libo
 
 termsnip = [] #lista e terminos que usaremos para generar el snippset
 conparent = []
@@ -143,6 +144,24 @@ def procesarTermino(tt):
     if "date:" in tt:
         return tt.replace("date:",""), 6
     return tt, 2
+
+def procesodist(laque):
+    laques = laque.lower()
+    laques = laques.split()
+    for indx in len(laques):
+        j = laques[indx]
+        if '%' in j:
+            elresult = libo.levenstein_vs_trie_ramificacion(tri,j[0:j.find('%')],int(j[j.find('%')+1]))
+            elresult = ' or '.join(elresult)
+            elresult  = '( ' + elresult + ' )'
+            laques[indx] = elresult
+        elif '@' in j:
+            elresult = libo.levenstein_vs_trie_ramificacionD(tri,j[0:j.find('@')],int(j[j.find('@')+1]))
+            elresult = ' or '.join(elresult)
+            elresult  = '( ' + elresult + ' )'
+            laques[indx] = elresult
+    return ' '.join(laques)
+
 """
 Se recorrera la querry detectando los operadores booleanos y realizando las
 operaciones interseccion, union y diferencia requeridas.
@@ -154,6 +173,11 @@ se han realizado diferentes if por si el termino es el primero, vaseguido de un
 and, or, not o culaquier combinacion.
 """
 def consulta(ind, q):
+    #aplicamos el preproceso pra transformal la palabeas co @ y % en un conjunto de palabras
+
+    print("Antes del proceso: ", q)
+    q = procesodist(q)
+    print("Despues del proceso: ", q)
     aux = None
     flag = 0
     while flag == 0: # se aplica parentesis hasta que se hayan sustituido todos por palabras clave
@@ -422,6 +446,7 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2:
         findi = sys.argv[1] #indice
         findi = load_object(findi)#(diccionario de documentos, diccionario de articulos, diccionario de terminos)
+        tri = load_object("eltrie")
         if len(sys.argv) >= 3:
             querry = sys.argv[2] #querry
         if querry != None:
