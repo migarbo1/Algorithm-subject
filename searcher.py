@@ -148,7 +148,7 @@ def procesarTermino(tt):
 def procesodist(laque):
     laques = laque.lower()
     laques = laques.split()
-    for indx in len(laques):
+    for indx in range(len(laques)):
         j = laques[indx]
         if '%' in j:
             elresult = libo.levenstein_vs_trie_ramificacion(tri,j[0:j.find('%')],int(j[j.find('%')+1]))

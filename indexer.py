@@ -75,6 +75,7 @@ def indexer(folder,fitxerGuardat):
                 #eliminación de caracteres no alfanumericos
                 text = clean_text(text)
                 title = clean_text(title)
+                summary = clean_text(summary)
 
 
                 #eliminación de saltos de linea y tabuladores
@@ -267,4 +268,4 @@ if __name__ == "__main__":
         savIndx = sys.argv[2]
         indexer(colNot, savIndx)
     else:
-        syntax()
+        print("Se esper los siguiente prametros, directorio de ficheros de noticias, nombre de fichero deguardado")
