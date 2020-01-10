@@ -106,7 +106,7 @@ def levenstein_distance(word1, word2):
     for i in range(1, len(word1) + 1):
         for j in range(1, len(word2) + 1):
             dif = not (word1[i - 1] == word2[j - 1])
-            levMat[i,j] = min(levMat[i-1, j], levMat[i-1, j-1], levMat[i, j-1]) + dif
+            levMat[i,j] = min(levMat[i-1, j]+1, levMat[i-1, j-1]+dif, levMat[i, j-1]+1)
 
     return levMat[len(word1), len(word2)]
 #fin distancia levenstein 1
